@@ -13,4 +13,5 @@ namespace _1911061972_NguyenBinhAn_Lab7.Models
         public string Author { set; get; }
         public double Price { set; get; }
     }
+    ///commit
 }
