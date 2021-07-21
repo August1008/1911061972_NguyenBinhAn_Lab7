@@ -42,7 +42,8 @@
                     $('#Book').text(formatItem(data));
                 })
                 .fail(function (jqXHR, textStatus, err) {
-                    $('#Book').text('Error:' + err);
+                    err = 'book does not exit';
+                    $('#Book').text('Error: ' + err);
                 });
         }
     </script>
