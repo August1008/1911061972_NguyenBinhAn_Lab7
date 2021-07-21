@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Online Book Store</title>
+</head>
+<body>
+    <div>
+        <h2>Book Store</h2>
+        <ul id="Books"></ul>
+
+        
+    </div>
+
+    <div>
+        <h2>Find Book By Id</h2>
+        <input type="text" id="bookid" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="Book"></p>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/Book';
+        $(document).ready(function () {
+            $.getJSON(uri)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        $('<li>', { text: formatItem(item) }).appendTo($('#Books'));
+                });
+        });
+        });
+
+        function formatItem(item) {
+            return item.Title + ': $' + item.Price;
+        }
+
+        function find() {
+            var id = $('#bookid').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#Book').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#Book').text('Error:' + err);
+                });
+        }
+    </script>
+</body>
+</html>
